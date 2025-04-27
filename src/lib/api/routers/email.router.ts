@@ -1,4 +1,3 @@
-import { env } from "@/env";
 import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
 import { Hono } from "hono";
@@ -14,9 +13,6 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
     user: headers["user"],
     password: headers["password"],
   };
-  const t = env.PORT;
-
-  console.log(t);
 
   const validateData = EmailHeaderSchema.safeParse(data);
 

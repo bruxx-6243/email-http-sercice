@@ -15,8 +15,8 @@ export const emailServices = {
     });
 
     return await transporter.sendMail({
-      from: headers.user,
       to: body.to,
+      from: headers.user,
       subject: body.subject,
       html: body.template,
     });

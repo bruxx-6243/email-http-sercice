@@ -1,10 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-export const renderName = (name: string) => {
-  return name;
-};
-
 export function convertTxtToJson(content: string) {
   const lines = content.split("\n").filter((line) => line.trim() !== "");
   return {
