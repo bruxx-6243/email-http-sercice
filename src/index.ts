@@ -7,7 +7,7 @@ const app = new Hono();
 app.get("/", (c) => {
   const name = renderName("Fariol");
 
-  return c.json(`Hello ${name} welcome to your first hono app`);
+  return c.json({ name: name, message: "Hello Hono!", array: [1, 2, 3, 4, 5] });
 });
 
 serve(
