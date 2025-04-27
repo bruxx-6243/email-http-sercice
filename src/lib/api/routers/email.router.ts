@@ -1,41 +1,41 @@
+import { emailServices } from "@/lib/api/services/email.services";
 import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
 import { Hono } from "hono";
-import { emailServices } from "../services/email.services";
 
 const emailRouter = new Hono().basePath("/email");
 
 emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
-  const headers = c.req.header();
+  const headersReq = c.req.header();
   const body = c.req.valid("json");
 
-  const data = {
-    user: headers["user"],
-    password: headers["password"],
+  const headers = {
+    user: headersReq["user"],
+    password: headersReq["password"],
   };
 
-  const validateData = EmailHeaderSchema.safeParse(data);
+  const validateHeaders = EmailHeaderSchema.safeParse(headers);
 
-  if (!validateData.success) {
+  if (!validateHeaders.success) {
     return c.json(
       {
         success: false,
         message: "Failed to validate headers the data",
-        error: validateData.error,
+        error: validateHeaders.error,
       },
       500
     );
   }
 
-  const { user, password } = validateData.data;
+  const { user, password } = validateHeaders.data;
 
-  const response = await emailServices.nodemailer({
+  const response = (await emailServices.nodemailer({
     headers: {
       user,
       password,
     },
     body,
-  });
+  })) as { messageId: string };
 
   if (!response) {
     return c.json(
@@ -51,6 +51,7 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
     {
       success: true,
       message: "Email sent successfully",
+      messageId: response.messageId,
     },
     200
   );
