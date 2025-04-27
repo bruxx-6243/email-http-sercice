@@ -50,8 +50,8 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
   return c.json(
     {
       success: true,
-      message: "Email sent successfully",
       messageId: response.messageId,
+      message: "Email sent successfully",
     },
     200
   );

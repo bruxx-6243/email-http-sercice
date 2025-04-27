@@ -2,10 +2,12 @@ import { env } from "@/env";
 import { HTTPException } from "@/lib/api/errors/http-exception";
 import routers from "@/lib/api/routers";
 import { readFileContent } from "@/lib/utils";
-import { serve } from "@hono/node-server";
+import { serve, type HttpBindings } from "@hono/node-server";
 import { Hono } from "hono";
 
-const app = new Hono();
+type Bindings = HttpBindings;
+
+const app = new Hono<{ Bindings: Bindings }>();
 
 app.get("/", (c) => {
   try {
