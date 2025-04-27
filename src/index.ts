@@ -1,13 +1,23 @@
-import { renderName } from "@/lib/utils";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { readFileContent } from "./lib/utils";
 
 const app = new Hono();
 
 app.get("/", (c) => {
-  const name = renderName("Fariol");
-
-  return c.json({ name: name, message: "Hello Hono!", array: [1, 2, 3, 4, 5] });
+  try {
+    const content = readFileContent("message.txt");
+    return c.json(content);
+  } catch (error) {
+    return c.json(
+      {
+        success: false,
+        message: "Failed to read the file",
+        error: (error as Error).message,
+      },
+      500
+    );
+  }
 });
 
 serve(

@@ -1,0 +1,8 @@
+HTTP Service – Message Sending (Edge Runtime)
+
+Hello, Welcome to this API!
+
+This HTTP service allows sending messages in an Edge Runtime environment, which does not support Node.js modules.
+It relies only on standard Web APIs like fetch, Request, and Response, ensuring compatibility and high performance.
+
+Developed by Fariol Blondeau, Software Engineer.
