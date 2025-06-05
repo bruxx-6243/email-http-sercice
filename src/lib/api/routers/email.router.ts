@@ -4,7 +4,7 @@ import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
 import { Hono } from "hono";
 
-const emailRouter = new Hono().basePath("/email");
+const emailRouter = new Hono().basePath("/");
 
 emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
   const headersReq = c.req.header();

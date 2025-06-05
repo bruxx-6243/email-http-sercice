@@ -3,7 +3,7 @@ import { logRouter as logs } from "@/lib/api/routers/log.router";
 
 export default [
   {
-    path: "/deliver",
+    path: "/send",
     router: emails,
   },
   {
