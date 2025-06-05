@@ -1,31 +1,41 @@
-name: CI
+name: email-http-service CI
 
 on:
   pull_request:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+    env:
+      EMAIL_USER: ${{ vars.EMAIL_USER }}
+      EMAIL_PASSWORD: ${{ vars.EMAIL_PASSWORD }}
 
-      - name: Install pnpm
+    steps:
+      - name: Checkout code 🛎️
+        uses: actions/checkout@v4
+
+      - name: Debug environment variables 🕵️
+        run: |
+          echo "EMAIL_USER: $EMAIL_USER"
+          echo "EMAIL_PASSWORD: [REDACTED]"
+
+      - name: Install pnpm 📦
         run: npm install -g pnpm
 
-      - name: Install dependencies
+      - name: Install dependencies 🧩
         run: pnpm install
 
-      - name: Set up environment variables
+      - name: Set up environment variables 📝
         run: |
-          echo "EMAIL_USER=${{ secrets.EMAIL_USER }}" >> .env.test
-          echo "EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}" >> .env.test
-        env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          echo "EMAIL_USER=$EMAIL_USER" >> .env.test
+          echo "EMAIL_PASSWORD=$EMAIL_PASSWORD" >> .env.test
 
-      - name: Run tests
+      - name: Run tests 🧪
         run: pnpm run test:once
         env:
           NODE_ENV: test
