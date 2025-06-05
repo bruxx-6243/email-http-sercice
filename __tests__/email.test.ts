@@ -1,5 +1,5 @@
-import { env } from "@/env";
 import { describe, expect, test } from "vitest";
+import { env } from "../src/env";
 import app from "../src/index";
 
 const TIMEOUT: number = 30000;
