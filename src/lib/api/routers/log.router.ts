@@ -6,6 +6,7 @@ type LogMessage = {
   messageId: string;
   message?: string;
   subject?: string;
+  receiver?: string;
 };
 
 const logRouter = new Hono();
@@ -18,6 +19,7 @@ logRouter.get("/", async (c) => {
       try {
         const parsed = JSON.parse(content);
         return {
+          receiver: parsed.receiver,
           success: parsed.success,
           messageId: parsed.messageId,
           message: parsed.message,
