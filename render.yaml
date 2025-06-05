@@ -1,21 +1,20 @@
-# Exported from Render on 2025-06-05T20:51:11Z
 services:
-- type: web
-  name: email-http-service
-  runtime: node
-  repo: https://github.com/bruxx-6243/email-http-sercice
-  plan: free
-  envVars:
-  - key: EMAIL_HOST
-    sync: false
-  - key: EMAIL_SERVICE
-    sync: false
-  - key: EMAIL_PORT
-    sync: false
-  - key: PORT
-    sync: false
-  region: oregon
-  buildCommand: pnpm install --frozen-lockfile; pnpm run build
-  startCommand: pnpm run start
-  autoDeployTrigger: commit
+  - type: web
+    name: email-http-service
+    runtime: node
+    repo: https://github.com/bruxx-6243/email-http-sercice
+    plan: free
+    envVars:
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_SERVICE
+        sync: false
+      - key: EMAIL_PORT
+        sync: false
+      - key: PORT
+        sync: false
+    region: oregon
+    buildCommand: pnpm install --frozen-lockfile; pnpm run build
+    startCommand: pnpm run start
+    autoDeployTrigger: commit
 version: "1"
