@@ -1,4 +1,4 @@
-import { env } from "./env";
+import { env } from "@/env";
 import { HTTPException } from "@/lib/api/errors/http-exception";
 import routers from "@/lib/api/routers";
 import { readFileContent } from "@/lib/utils";
