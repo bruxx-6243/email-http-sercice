@@ -1,4 +1,5 @@
 import { emailServices } from "@/lib/api/services/email.services";
+import { createLog } from "@/lib/utils";
 import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
 import { Hono } from "hono";
@@ -46,6 +47,13 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
       500
     );
   }
+
+  await createLog(
+    JSON.stringify({
+      subject: body.subject,
+      messageId: response.messageId,
+    })
+  );
 
   return c.json(
     {

@@ -5,10 +5,10 @@ import nodemailer from "nodemailer";
 export const emailServices = {
   nodemailer: async ({ headers, body }: Email) => {
     const transporter = nodemailer.createTransport({
-      port: env.EMAIL_PORT,
       secure: true,
-      service: env.EMAIL_SERVICE,
+      port: env.EMAIL_PORT,
       host: env.EMAIL_HOST,
+      service: env.EMAIL_SERVICE,
       auth: {
         user: headers.user,
         pass: headers.password,
