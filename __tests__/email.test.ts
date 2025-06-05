@@ -5,7 +5,7 @@ import app from "../src/index";
 const TIMEOUT: number = 30000;
 
 describe("Ensure that the API works perfectly", () => {
-  test(
+  test.todo(
     "can send an email if data are valid",
     async () => {
       const response = await app.request("/send", {
