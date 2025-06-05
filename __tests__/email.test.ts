@@ -16,7 +16,7 @@ describe("Ensure that the API works perfectly", () => {
           password: env.EMAIL_PASSWORD!,
         },
         body: JSON.stringify({
-          to: "didipij459@claspira.com",
+          to: "blondeau.nbif@gmail.com",
           subject: "Test Notification",
           template: "test",
         }),
