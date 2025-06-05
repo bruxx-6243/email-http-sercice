@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       EMAIL_USER: ${{ vars.EMAIL_USER }}
-      EMAIL_PASSWORD: ${{ vars.EMAIL_PASSWORD }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
 
     steps:
       - name: Checkout code 🛎️
