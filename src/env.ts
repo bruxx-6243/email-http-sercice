@@ -9,6 +9,10 @@ const EnvSchema = z.object({
   EMAIL_PORT: z.coerce.number().optional(),
   EMAIL_HOST: z.string().optional(),
   EMAIL_SERVICE: z.string().optional(),
+
+  // For testing
+  EMAIL_USER: z.string().optional(),
+  EMAIL_PASSWORD: z.string().optional(),
 });
 
 type Env = z.infer<typeof EnvSchema>;
