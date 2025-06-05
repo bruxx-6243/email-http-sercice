@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const EmailHeaderSchema = z.object({
-  user: z.string().email({ message: "Invalid email" }),
+  user: z.string().min(1, { message: "Username is required" }),
   password: z.string(),
 });
 

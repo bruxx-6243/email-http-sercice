@@ -1,13 +1,14 @@
+import { env } from "@/env";
 import type { Email } from "@/types";
 import nodemailer from "nodemailer";
 
 export const emailServices = {
   nodemailer: async ({ headers, body }: Email) => {
     const transporter = nodemailer.createTransport({
-      port: 587,
-      secure: false,
-      service: "gmail",
-      host: "smtp.gmail.com",
+      port: env.EMAIL_PORT,
+      secure: true,
+      service: env.EMAIL_SERVICE,
+      host: env.EMAIL_HOST,
       auth: {
         user: headers.user,
         pass: headers.password,

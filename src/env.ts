@@ -6,6 +6,9 @@ expand(config());
 
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3000),
+  EMAIL_PORT: z.coerce.number().optional(),
+  EMAIL_HOST: z.string().optional(),
+  EMAIL_SERVICE: z.string().optional(),
 });
 
 type Env = z.infer<typeof EnvSchema>;
