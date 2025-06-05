@@ -1,20 +1,21 @@
 on:
-  pull_request:
+  pull_request: 🔍
   push:
-    branches: [main]
+    branches: [main] 🌟
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 🐧
     steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
+      - uses: actions/checkout@v3 📦
+      - name: Install pnpm 📲
         run: npm install -g pnpm
-      - name: Install dependencies
+      - name: Install dependencies ⚙️
         run: pnpm install
-      - name: Deploy
+      - name: Deploy 🚀
         if: github.ref == 'refs/heads/main'
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl "$deploy_url"
+          echo "🚀 Deployed to: $deploy_url" 📄
