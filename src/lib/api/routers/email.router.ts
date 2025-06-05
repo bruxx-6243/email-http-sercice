@@ -50,6 +50,7 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
 
   await createLog(
     JSON.stringify({
+      receiver: body.to,
       subject: body.subject,
       messageId: response.messageId,
     })
