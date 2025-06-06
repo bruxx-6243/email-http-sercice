@@ -1,4 +1,7 @@
-import { emailServices } from "@/lib/api/services/email.services";
+import {
+  emailServices,
+  supportedProviders,
+} from "@/lib/api/services/email.services";
 import { createLog } from "@/lib/utils";
 import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
@@ -24,6 +27,16 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
         success: false,
         message: "Failed to validate headers the data",
         error: validateHeaders.error,
+      },
+      500
+    );
+  }
+
+  if (!provider || !supportedProviders.includes(provider)) {
+    return c.json(
+      {
+        success: false,
+        message: "Provider not supported",
       },
       500
     );

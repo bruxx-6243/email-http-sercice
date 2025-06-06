@@ -15,6 +15,8 @@ const emailProviders = {
   },
 };
 
+export const supportedProviders = Object.keys(emailProviders);
+
 export const emailServices = {
   nodemailer: async ({
     body,
@@ -23,15 +25,9 @@ export const emailServices = {
   }: Email & { provider?: string }) => {
     const transporter = nodemailer.createTransport({
       secure: true,
-      port: provider
-        ? emailProviders[provider as keyof typeof emailProviders].port
-        : env.GMAIL_PORT,
-      host: provider
-        ? emailProviders[provider as keyof typeof emailProviders].host
-        : env.GMAIL_HOST,
-      service: provider
-        ? emailProviders[provider as keyof typeof emailProviders].service
-        : env.GMAIL_SERVICE,
+      port: emailProviders[provider as keyof typeof emailProviders].port,
+      host: emailProviders[provider as keyof typeof emailProviders].host,
+      service: emailProviders[provider as keyof typeof emailProviders].service,
       auth: {
         user: headers.user,
         pass: headers.password,
