@@ -36,7 +36,7 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
     return c.json(
       {
         success: false,
-        message: "Provider not supported",
+        message: "Provider not provided or not supported",
       },
       500
     );
