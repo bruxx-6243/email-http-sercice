@@ -10,7 +10,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["json", "lcov"],
-      reportsDirectory: "./__tests__/unit/coverage",
+      reportsDirectory: "./coverage",
     },
     environment: "node",
     env: {
