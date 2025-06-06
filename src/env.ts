@@ -6,9 +6,16 @@ expand(config());
 
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3000),
-  EMAIL_PORT: z.coerce.number().optional(),
-  EMAIL_HOST: z.string().optional(),
-  EMAIL_SERVICE: z.string().optional(),
+
+  // For GMAIL
+  GMAIL_PORT: z.coerce.number().optional(),
+  GMAIL_HOST: z.string().optional(),
+  GMAIL_SERVICE: z.string().optional(),
+
+  // For MAILRU
+  MAILRU_PORT: z.coerce.number().optional(),
+  MAILRU_HOST: z.string().optional(),
+  MAILRU_SERVICE: z.string().optional(),
 
   // For testing
   EMAIL_USER: z.string().optional(),

@@ -9,6 +9,7 @@ const emailRouter = new Hono().basePath("/");
 emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
   const headersReq = c.req.header();
   const body = c.req.valid("json");
+  const provider = c.req.query("provider");
 
   const headers = {
     user: headersReq["user"],
@@ -36,6 +37,7 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
       password,
     },
     body,
+    provider,
   })) as { messageId: string };
 
   if (!response) {
