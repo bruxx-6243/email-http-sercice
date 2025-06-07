@@ -17,6 +17,11 @@ const EnvSchema = z.object({
   MAILRU_HOST: z.string().optional(),
   MAILRU_SERVICE: z.string().optional(),
 
+  // For YANDEX
+  YANDEX_PORT: z.coerce.number().optional(),
+  YANDEX_HOST: z.string().optional(),
+  YANDEX_SERVICE: z.string().optional(),
+
   // For testing
   EMAIL_USER: z.string().optional(),
   EMAIL_PASSWORD: z.string().optional(),

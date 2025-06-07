@@ -13,6 +13,11 @@ const emailProviders = {
     port: env.GMAIL_PORT,
     service: env.GMAIL_SERVICE,
   },
+  yandex: {
+    host: env.YANDEX_HOST,
+    port: env.YANDEX_PORT,
+    service: env.YANDEX_SERVICE,
+  },
 };
 
 export const supportedProviders = Object.keys(emailProviders);
