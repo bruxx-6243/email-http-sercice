@@ -1,4 +1,7 @@
-import { emailServices } from "@/lib/api/services/email.services";
+import {
+  emailServices,
+  supportedProviders,
+} from "@/lib/api/services/email.services";
 import { createLog } from "@/lib/utils";
 import { EmailBodySchema, EmailHeaderSchema } from "@/types";
 import { zValidator } from "@/types/validator-wrapper";
@@ -9,6 +12,7 @@ const emailRouter = new Hono().basePath("/");
 emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
   const headersReq = c.req.header();
   const body = c.req.valid("json");
+  const provider = c.req.query("provider");
 
   const headers = {
     user: headersReq["user"],
@@ -28,6 +32,16 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
     );
   }
 
+  if (!provider || !supportedProviders.includes(provider)) {
+    return c.json(
+      {
+        success: false,
+        message: "Provider not provided or not supported",
+      },
+      500
+    );
+  }
+
   const { user, password } = validateHeaders.data;
 
   const response = (await emailServices.nodemailer({
@@ -36,6 +50,7 @@ emailRouter.post("/", zValidator("json", EmailBodySchema), async (c) => {
       password,
     },
     body,
+    provider,
   })) as { messageId: string };
 
   if (!response) {
